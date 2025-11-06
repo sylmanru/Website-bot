@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewa Bot WhatsApp - Otomasi Bisnis Anda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-icon {
+            font-size: 60px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .services {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .pricing-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #667eea;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured .badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .period {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .features li {
+            padding: 10px 0;
+            color: #666;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .script-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .script-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .script-card h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .script-card p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact {
+            background: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .contact-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-button:hover {
+            background: #20b358;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🤖 Bot WhatsApp</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="whatsapp-icon">💬</div>
+            <h1>Otomasi Bisnis Anda dengan Bot WhatsApp</h1>
+            <p>Tingkatkan efisiensi dan layanan pelanggan dengan bot WhatsApp profesional</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Paket Sewa Bot WhatsApp</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="plan-name">Bulanan</div>
+                    <div class="price">10K</div>
+                    <div class="period">per bulan</div>
+                    <ul class="features">
+                        <li>Bot WhatsApp aktif 24/7</li>
+                        <li>Auto reply pesan</li>
+                        <li>Fitur dasar lengkap</li>
+                        <li>Support teknis</li>
+                    </ul>
+                    <a href="https://wa.me/62881025088222?text=Halo,%20saya%20tertarik%20dengan%20paket%20Bulanan" class="cta-button">Pilih Paket</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge">POPULER</div>
+                    <div class="plan-name">3 Bulan</div>
+                    <div class="price">25K</div>
+                    <div class="period">hemat 5K!</div>
+                    <ul class="features">
+                        <li>Semua fitur paket bulanan</li>
+                        <li>Hemat lebih banyak</li>
+                        <li>Prioritas support</li>
+                        <li>Custom commands</li>
+                    </ul>
+                    <a href="https://wa.me/62881025088222?text=Halo,%20saya%20tertarik%20dengan%20paket%203%20Bulan" class="cta-button">Pilih Paket</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Permanent</div>
+                    <div class="price">40K</div>
+                    <div class="period">sekali bayar</div>
+                    <ul class="features">
+                        <li>Akses selamanya</li>
+                        <li>Semua fitur premium</li>
+                        <li>Update gratis</li>
+                        <li>Dukungan penuh</li>
+                    </ul>
+                    <a href="https://wa.me/62881025088222?text=Halo,%20saya%20tertarik%20dengan%20paket%20Permanent" class="cta-button">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="script-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Script Bot WhatsApp</h2>
+            <div class="script-card">
+                <h3>💻 Jual Script Bot WhatsApp</h3>
+                <p>Dapatkan source code lengkap bot WhatsApp untuk dikembangkan sendiri. Cocok untuk developer atau yang ingin membangun layanan bot sendiri.</p>
+                <ul class="features" style="max-width: 500px; margin: 0 auto 30px;">
+                    <li>Source code lengkap & dokumentasi</li>
+                    <li>Mudah dikustomisasi</li>
+                    <li>Update & support tersedia</li>
+                    <li>Cocok untuk pemula & profesional</li>
+                </ul>
+                <a href="https://wa.me/62881025088222?text=Halo,%20saya%20tertarik%20membeli%20Script%20Bot%20WhatsApp" class="cta-button">Tanya Harga Script</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="contact-info">
+                <h3>📱 Kontak WhatsApp</h3>
+                <div class="contact-number">+62 881-0250-88222</div>
+                <p>Siap melayani Anda untuk konsultasi dan pemesanan</p>
+                <a href="https://wa.me/62881025088222?text=Halo,%20saya%20ingin%20bertanya%20tentang%20layanan%20bot" class="whatsapp-button">💬 Chat via WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bot WhatsApp Services. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
